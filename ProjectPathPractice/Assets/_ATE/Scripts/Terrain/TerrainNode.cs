@@ -1,5 +1,4 @@
-﻿using ATE.Nav;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +6,9 @@ using UnityEngine;
 namespace ATE.Terrain
 {
     [Serializable]
-	public class TerrainNode// : MonoBehaviour
+	public class TerrainNode : MonoBehaviour
 	{
-        public NavNode nav;
+        public List<TerrainNode> paths = new List<TerrainNode> ();
 
         public TerrainType type = TerrainType.Ground;
         public int height = 0;
