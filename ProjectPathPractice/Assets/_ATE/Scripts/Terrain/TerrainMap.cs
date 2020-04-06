@@ -7,6 +7,7 @@ namespace ATE.Terrain
 	public abstract class TerrainMap : MonoBehaviour
 	{
         public TerrainNode defaultNodePrefab;
+        public TerrainTypeSettings typeSettings;
 
         public abstract void BuildDefaultMap();
 		

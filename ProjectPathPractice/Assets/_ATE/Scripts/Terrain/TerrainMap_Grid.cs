@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace ATE.Terrain
@@ -35,8 +36,12 @@ namespace ATE.Terrain
                     newNode.transform.localPosition = new Vector3 (x * nodeSpacingX, y * nodeSpacingY, 0);
                     newNode.transform.localRotation = defaultNodePrefab.transform.rotation;
 
+                    newNode.name = $"{newNode.name} ({x}, {y})";
+
                     // Move along x axis first?
                     flatMap[(y * sizeX) + x] = newNode;
+
+                    newNode.ApplyTerrainTypeSettings (typeSettings);
                 }
 
             // Connect paths together
@@ -51,6 +56,10 @@ namespace ATE.Terrain
                     theNode.paths.Add (GetNode (x, y + 1));
                     theNode.paths.Add (GetNode (x, y - 1));
                 }
+
+            // Tell Unity the object/scene has changed
+            EditorUtility.SetDirty (this.gameObject);
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         }
 
 
