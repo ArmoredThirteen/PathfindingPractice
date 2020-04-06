@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace ATE.Terrain
@@ -37,6 +38,8 @@ namespace ATE.Terrain
 
                     // Move along x axis first?
                     flatMap[(y * sizeX) + x] = newNode;
+
+                    newNode.ApplyTerrainTypeSettings (typeSettings);
                 }
 
             // Connect paths together
@@ -51,6 +54,10 @@ namespace ATE.Terrain
                     theNode.paths.Add (GetNode (x, y + 1));
                     theNode.paths.Add (GetNode (x, y - 1));
                 }
+
+            // Tell Unity the object has changed
+            EditorUtility.SetDirty (this.gameObject);
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         }
 
 
