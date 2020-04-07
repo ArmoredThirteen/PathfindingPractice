@@ -36,8 +36,6 @@ namespace ATE.Pathing.BreadthFirst
         // Returns true when pathing is complete
         public void IteratePath()
         {
-            Debug.Log ("Iterate");
-
             if (frontier.Count <= 0)
             {
                 Debug.Log ("Frontier is empty");

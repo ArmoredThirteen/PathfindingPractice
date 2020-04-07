@@ -7,6 +7,8 @@ namespace ATE.Pathing
 {
 	public class RunBreadthFirst : MonoBehaviour
 	{
+        public float iterationTime = 0.1f;
+
         public GameObject visitedObj;
         public GameObject frontierObj;
         public GameObject pathObj;
@@ -15,12 +17,15 @@ namespace ATE.Pathing
         public PathTarget to;
 
 
+        private float timerIteration;
+
         private List<GameObject> feedbackObjs;
         private PathBuilder builder;
         
 
         private void Start()
         {
+            timerIteration = iterationTime;
             feedbackObjs = new List<GameObject> ();
             builder = new PathBuilder ();
             builder.RestartPathing (from.currNode, to.currNode);
@@ -31,8 +36,13 @@ namespace ATE.Pathing
             if (builder.complete)
                 return;
 
-            //while (!builder.complete)
-                builder.IteratePath ();
+            // Iterate once per stated time interval
+            timerIteration -= Time.deltaTime;
+            if (timerIteration > 0)
+                return;
+            timerIteration = iterationTime;
+
+            builder.IteratePath ();
             
             // Rebuild all feedback objects rather hackily
             while (feedbackObjs.Count > 0)
@@ -42,10 +52,10 @@ namespace ATE.Pathing
             }
             // Instantiate visited feedback objects
             for (int i = 0; i < builder.visited.Count; i++)
-                GameObject.Instantiate (visitedObj, builder.visited[i].transform.position, transform.rotation, transform);
+                feedbackObjs.Add (GameObject.Instantiate (visitedObj, builder.visited[i].transform.position, transform.rotation, transform));
             // Instantiate frontier feedback objects
             for (int i = 0; i < builder.frontier.Count; i++)
-                GameObject.Instantiate (frontierObj, builder.frontier.ToArray()[i].transform.position, transform.rotation, transform);
+                feedbackObjs.Add (GameObject.Instantiate (frontierObj, builder.frontier.ToArray()[i].transform.position, transform.rotation, transform));
         }
 
     }
