@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ATE.Pathing
+namespace ATE.Pathing.BreadthFirst
 {
-	public class RunBreadthFirst : MonoBehaviour
+	public class RunPathing : MonoBehaviour
 	{
         public float iterationTime = 0.1f;
 

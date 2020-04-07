@@ -11,6 +11,7 @@ namespace ATE.Terrain
         {
             public TerrainType type = TerrainType.Ground;
             public Material material;
+            public float moveCost = 10;
         }
 
 

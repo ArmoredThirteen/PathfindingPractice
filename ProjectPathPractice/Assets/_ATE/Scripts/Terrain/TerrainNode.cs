@@ -13,7 +13,7 @@ namespace ATE.Terrain
         public List<TerrainNode> paths = new List<TerrainNode> ();
 
         public TerrainType type = TerrainType.Ground;
-        public int height = 0;
+        public float moveCost = 10;
 
 
         public void ApplyTerrainTypeSettings(TerrainTypeSettings typeSettings)
@@ -22,6 +22,8 @@ namespace ATE.Terrain
 
             Renderer nodeRenderer = GetComponent<Renderer> ();
             nodeRenderer.material = theSettings.material;
+
+            moveCost = theSettings.moveCost;
 
             EditorUtility.SetDirty (this);
         }
