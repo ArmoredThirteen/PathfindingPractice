@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace ATE.Terrain
@@ -20,6 +22,8 @@ namespace ATE.Terrain
 
             Renderer nodeRenderer = GetComponent<Renderer> ();
             nodeRenderer.material = theSettings.material;
+
+            EditorUtility.SetDirty (this);
         }
 
 	}
