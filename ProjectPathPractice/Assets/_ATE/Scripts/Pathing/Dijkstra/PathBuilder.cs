@@ -7,15 +7,27 @@ namespace ATE.Pathing.Dijkstra
 {
     public class PathBuilder
 	{
+        public class MoveCostNode
+        {
+            public TerrainNode node;
+            public float totalMoveCost;
+
+            public MoveCostNode(TerrainNode theNode, float theMoveCost)
+            {
+                node = theNode;
+                totalMoveCost = theMoveCost;
+            }
+        }
+
         public bool complete;
 
         public TerrainNode from;
         public TerrainNode to;
 
         public List<TerrainNode> visited;
-        public Queue<TerrainNode> frontier;
+        public List<MoveCostNode> frontier;
 
-        public Dictionary<int, TerrainNode> cameFrom;
+        public Dictionary<int, MoveCostNode> currPath;
         public List<TerrainNode> finalPath;
 
 
@@ -27,13 +39,13 @@ namespace ATE.Pathing.Dijkstra
             to = toNode;
 
             visited = new List<TerrainNode> ();
-            frontier = new Queue<TerrainNode> ();
+            frontier = new List<MoveCostNode> ();
 
-            cameFrom = new Dictionary<int, TerrainNode> ();
+            currPath = new Dictionary<int, MoveCostNode> ();
             finalPath = new List<TerrainNode> ();
 
             visited.Add (from);
-            frontier.Enqueue (from);
+            frontier.Add (new MoveCostNode (from, 0));
         }
         
         // Returns true when pathing is complete
@@ -46,33 +58,46 @@ namespace ATE.Pathing.Dijkstra
                 return;
             }
             
-            TerrainNode currNode = frontier.Dequeue ();
-            if (currNode == to)
+            MoveCostNode curr = frontier[0];
+            frontier.RemoveAt (0);
+            if (curr.node == to)
             {
-                Debug.Log ($"Found: {currNode.name}");
+                Debug.Log ($"Found: {curr.node.name}");
 
-                // Use cameFrom to find path back
+                TerrainNode currNode = curr.node;
                 finalPath.Add (currNode);
                 while (currNode != from)
                 {
-                    currNode = cameFrom[currNode.GetInstanceID ()];
+                    currNode = currPath[currNode.GetInstanceID ()].node;
                     finalPath.Add (currNode);
-                } 
+                }
                 finalPath.Reverse ();
 
                 complete = true;
                 return;
             }
-
-            for (int i = 0; i < currNode.paths.Count; i++)
+            
+            for (int i = 0; i < curr.node.paths.Count; i++)
             {
-                TerrainNode path = currNode.paths[i];
-                if (path == null || path.type == TerrainType.Blocked || visited.Contains (path))
+                TerrainNode path = curr.node.paths[i];
+                if (path == null || path.type == TerrainType.Blocked)
                     continue;
 
+                float newCost = curr.totalMoveCost + path.moveCost;
+                
+                // Current paths either don't have the path node, or they do but the new move cost is better than existing move cost
+                if (visited.Contains (path))
+                    continue;
+                if (currPath.ContainsKey (path.GetInstanceID ()) && newCost >= currPath[path.GetInstanceID ()].totalMoveCost)
+                    continue;
+
+                currPath.Remove (path.GetInstanceID ());
+
+                currPath.Add (path.GetInstanceID (), new MoveCostNode (curr.node, newCost));
                 visited.Add (path);
-                frontier.Enqueue (path);
-                cameFrom.Add (path.GetInstanceID (), currNode);
+
+                frontier.Add (new MoveCostNode (path, newCost));
+                frontier.Sort ((a,b) => a.totalMoveCost.CompareTo (b.totalMoveCost));
             }
         }
 		

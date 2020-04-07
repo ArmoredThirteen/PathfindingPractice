@@ -62,7 +62,7 @@ namespace ATE.Pathing.Dijkstra
 
             // Instantiate frontier feedback objects
             for (int i = 0; i < builder.frontier.Count; i++)
-                feedbackObjs.Add (GameObject.Instantiate (frontierObj, builder.frontier.ToArray()[i].transform.position, transform.rotation, transform));
+                feedbackObjs.Add (GameObject.Instantiate (frontierObj, builder.frontier.ToArray()[i].node.transform.position, transform.rotation, transform));
         }
 
     }
