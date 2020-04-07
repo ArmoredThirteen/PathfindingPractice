@@ -50,9 +50,16 @@ namespace ATE.Pathing
                 Destroy (feedbackObjs[0]);
                 feedbackObjs.RemoveAt (0);
             }
+
+            // Instantiate final path feedback objects
+            if (builder.complete)
+                for (int i = 0; i < builder.finalPath.Count; i++)
+                    feedbackObjs.Add (GameObject.Instantiate (pathObj, builder.finalPath[i].transform.position, transform.rotation, transform));
+
             // Instantiate visited feedback objects
             for (int i = 0; i < builder.visited.Count; i++)
                 feedbackObjs.Add (GameObject.Instantiate (visitedObj, builder.visited[i].transform.position, transform.rotation, transform));
+
             // Instantiate frontier feedback objects
             for (int i = 0; i < builder.frontier.Count; i++)
                 feedbackObjs.Add (GameObject.Instantiate (frontierObj, builder.frontier.ToArray()[i].transform.position, transform.rotation, transform));

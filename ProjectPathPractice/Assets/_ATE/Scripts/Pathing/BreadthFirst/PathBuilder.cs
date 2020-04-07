@@ -15,6 +15,7 @@ namespace ATE.Pathing.BreadthFirst
         public List<TerrainNode> visited;
         public Queue<TerrainNode> frontier;
 
+        public Dictionary<int, TerrainNode> cameFrom;
         public List<TerrainNode> finalPath;
 
 
@@ -27,6 +28,8 @@ namespace ATE.Pathing.BreadthFirst
 
             visited = new List<TerrainNode> ();
             frontier = new Queue<TerrainNode> ();
+
+            cameFrom = new Dictionary<int, TerrainNode> ();
             finalPath = new List<TerrainNode> ();
 
             visited.Add (from);
@@ -47,6 +50,16 @@ namespace ATE.Pathing.BreadthFirst
             if (currNode == to)
             {
                 Debug.Log ($"Found: {currNode.name}");
+
+                // Use cameFrom to find path back
+                finalPath.Add (currNode);
+                while (currNode != from)
+                {
+                    currNode = cameFrom[currNode.GetInstanceID ()];
+                    finalPath.Add (currNode);
+                } 
+                finalPath.Reverse ();
+
                 complete = true;
                 return;
             }
@@ -59,6 +72,7 @@ namespace ATE.Pathing.BreadthFirst
 
                 visited.Add (path);
                 frontier.Enqueue (path);
+                cameFrom.Add (path.GetInstanceID (), currNode);
             }
         }
 		

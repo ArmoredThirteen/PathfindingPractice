@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff5c489ac1ee4649ba6baf040608ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterationTime: 0.1
+  iterationTime: 0.01
   visitedObj: {fileID: 6444029904856056717, guid: fc74767846177fe419e7ed1caa878691,
     type: 3}
   frontierObj: {fileID: 1620542696284842030, guid: 1cf118dca12c3b849a6216233b4e56e4,
