@@ -1,0 +1,213 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8324611570419858955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4790705744630684423}
+  - component: {fileID: 2781457512246781166}
+  - component: {fileID: 6052329709870829832}
+  - component: {fileID: 2236868380548621189}
+  m_Layer: 0
+  m_Name: PathingExample
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4790705744630684423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8324611570419858955}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.5, y: -5.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2781457512246781166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8324611570419858955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d240d6ccbb2a743892dd4163b9e270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveMap: {fileID: 6052329709870829832}
+  moveMapVisualizer: {fileID: 2236868380548621189}
+  startPosition: {x: 4, y: 6}
+  maxTotalMove: 6
+  moveCostTextOffset: {x: -0.35, y: 0.5, z: 0}
+--- !u!114 &6052329709870829832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8324611570419858955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc0eb41719c54940878ff7ceeb0647a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveCostCSV: {fileID: 4900000, guid: 498f4e168cbe12f42b67abbbe8a1e68f, type: 3}
+  minPathableCost: 1
+  xLen: 10
+  yLen: 12
+  moveCosts:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - Infinity
+  - Infinity
+  - Infinity
+  - Infinity
+  - Infinity
+  - Infinity
+  - 1
+  - 1
+  - 1
+  - 1
+  - Infinity
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - Infinity
+  - Infinity
+  - Infinity
+  - Infinity
+  - Infinity
+  - Infinity
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - Infinity
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - Infinity
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - Infinity
+  - 1
+  - 1
+  - 1
+  - Infinity
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - Infinity
+  - 1
+  - 1
+  - Infinity
+  - Infinity
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+--- !u!114 &2236868380548621189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8324611570419858955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a042dd9137478bb49a28cfdd0cdfdca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveMap: {fileID: 6052329709870829832}
+  defaultCostObj: {fileID: 7974179219645011440, guid: 361d390dfec20d846aa808d05f558464,
+    type: 3}
+  unpathableCostObj: {fileID: 7974179219645011440, guid: fa20a4f3055edb34e8fa2841e6920767,
+    type: 3}
+  costObjects:
+  - moveCost: 1
+    prefab: {fileID: 6819220940861803822, guid: 64b5c7224933861498609ee4fe208b83,
+      type: 3}
+  - moveCost: 3.5
+    prefab: {fileID: 2043334444608520659, guid: 3858387e536b23a419b4c51b7c2c1d3c,
+      type: 3}
